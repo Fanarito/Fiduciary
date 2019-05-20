@@ -51,7 +51,7 @@ proc downloadAll*() =
             site.saveContent(xpathText)
 
             let pages = site.getAllPages()
-        site.notifyByEmail()
+            site.notifyByEmail()
 
 proc getAllSites*(): seq[Website] =
     return getAll()
