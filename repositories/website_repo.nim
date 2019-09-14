@@ -40,7 +40,7 @@ proc saveContent*(site: website_repo.Website, text: string) =
     writeFile(fileName, text)
 
 proc getAllContent*(site: Website): seq[string] =
-    let pageDir = getPageDir(site)
+    let pageDir = site.getPageDir()
     let pages = site.getAllPages()
     var contents = newSeq[string]()
     for page in pages:
