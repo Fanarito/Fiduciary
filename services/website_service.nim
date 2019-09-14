@@ -1,4 +1,4 @@
-import httpclient, htmlparser, strformat, strutils, osproc, ospaths, smtp
+import httpclient, htmlparser, strformat, strutils, osproc, os, smtp
 import ../repositories/website_repo, ../xpath
 
 proc downloadWebsite*(site: Website): string =
@@ -24,12 +24,6 @@ proc sendEmail(site: Website, title: string, message: string) =
     smtpConn.sendMail(sender, @[receiver], $msg)
 
 proc notifyByEmail(site: Website) =
-    let smtpServer = getEnv("FID_SMTP_SERVER", "smtp.gmail.com")
-    let smtpServerPort = Port getEnv("FID_SMTP_SERVER_PORT", "465").parseInt
-    let sender = getEnv("FID_SENDER")
-    let receiver = getEnv("FID_RECEIVER", sender)
-    let password = getEnv("FID_PASSWORD")
-
     let pages = site.getAllPages()
     if pages.len >= 2:
         let h = pages.high
@@ -54,7 +48,6 @@ proc downloadAll*() =
               echo &"{site.name} has updated content"
               site.saveContent(xpathText)
 
-            let pages = site.getAllPages()
             site.notifyByEmail()
         except:
             echo "Downloading or parsing site failed, notifying by email"

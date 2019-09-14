@@ -24,7 +24,6 @@ proc getAll*(): seq[Website] =
     return to(parseFile(repoFile), seq[Website])
 
 proc getLatestContent*(site: Website): string =
-    let pageDir = site.getPageDir()
     let pages = site.getAllPages()
     if pages.len > 0:
         let latest = readFile(pages.max)
@@ -40,7 +39,6 @@ proc saveContent*(site: website_repo.Website, text: string) =
     writeFile(fileName, text)
 
 proc getAllContent*(site: Website): seq[string] =
-    let pageDir = site.getPageDir()
     let pages = site.getAllPages()
     var contents = newSeq[string]()
     for page in pages:
