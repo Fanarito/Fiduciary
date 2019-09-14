@@ -1,4 +1,4 @@
-FROM nimlang/nim:0.19.6-alpine
+FROM nimlang/nim:0.20.2-alpine
 
 RUN apk update && apk upgrade && apk add git python3 py3-pip
 RUN pip3 install ansi2html
