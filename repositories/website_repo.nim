@@ -34,8 +34,8 @@ proc getLatestContent*(site: Website): string =
 proc saveContent*(site: website_repo.Website, text: string) =
     let dir = getPageDir(site)
     createDir(dir)
-    let time = now()
-    let fileName = &"{dir}/{time.utc}.txt"
+    let t = $now()
+    let fileName = &"{dir}/{t}.txt"
     writeFile(fileName, text)
 
 proc getAllContent*(site: Website): seq[string] =
