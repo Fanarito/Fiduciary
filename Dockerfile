@@ -1,6 +1,6 @@
-FROM nimlang/nim:1.0.6-alpine
+FROM nimlang/nim:1.0.6-regular
 
-RUN apk update && apk upgrade && apk add git python3 py3-pip
+RUN apt-get -qq update && apt-get install -y -qq git python3 python3-pip
 RUN pip3 install ansi2html
 
 WORKDIR /app
