@@ -47,8 +47,7 @@ proc downloadAll*() =
             if xpathText != latest:
               echo &"{site.name} has updated content"
               site.saveContent(xpathText)
-
-            site.notifyByEmail()
+              site.notifyByEmail()
         except:
             echo "Downloading or parsing site failed, notifying by email"
             site.sendEmail(&"{site.name} error fetching or parsing", &"{site.url} could not be fetched or parsed. Manual intervention needed.")
